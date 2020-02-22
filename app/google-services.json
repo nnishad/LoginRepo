@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "260185012851",
+    "firebase_url": "https://midi-trio.firebaseio.com",
+    "project_id": "midi-trio",
+    "storage_bucket": "midi-trio.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260185012851:android:ac3bc7c610e8e075728806",
+        "android_client_info": {
+          "package_name": "com.tragicbytes.midi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "260185012851-9q4sv2c17tch2rldvo1dub7uc6nq01ve.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tragicbytes.midi",
+            "certificate_hash": "75b4fd31c3293ed2e33964f9470b137090ea4072"
+          }
+        },
+        {
+          "client_id": "260185012851-snhkunigvtco1u9to4vtsc7iphnogjrr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADCFLfyb0LKRdKQXSDCZKLhyw6bU7AXV4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "260185012851-snhkunigvtco1u9to4vtsc7iphnogjrr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
