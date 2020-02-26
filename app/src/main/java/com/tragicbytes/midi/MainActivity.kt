@@ -5,21 +5,61 @@ import android.content.ActivityNotFoundException
 import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
+import android.view.View
+import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : FirebaseConfig() {
     private lateinit var mFirebaseRemoteConfig: FirebaseRemoteConfig
     private var VersionCode = "versionCode"
+    private lateinit var mAuth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         mFirebaseRemoteConfig = getRemoteConfigValues()
         setRemoteConfigValues()
-    }
 
+
+
+        loginbtn.setOnClickListener {
+            //region LoginButtonFunctionality
+            try {
+
+                val email = username.text.toString().trim()
+                val passwords = password.text.toString().trim()
+
+                if (email.isEmpty()) {
+                    username.error = "Email Required"
+                    username.requestFocus()
+                    return@setOnClickListener
+                }
+
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    username.error = "Valid Email Required"
+                    username.requestFocus()
+                    return@setOnClickListener
+                }
+
+                if (passwords.isEmpty() || passwords.length < 6) {
+                    password.error = "6 char password required"
+                    password.requestFocus()
+                    return@setOnClickListener
+                }
+                /*username.isEnabled=false
+                password.isEnabled=false*/
+                loginUser(email, passwords)
+
+            } catch (e: Exception) {
+                loginbtn.error = e.message
+            }
+
+        }
+    }
 
     //region Firebase Config Method 2
     private fun setRemoteConfigValues() {
@@ -32,6 +72,7 @@ class MainActivity : FirebaseConfig() {
 
         //endregion
 
+        //region App Update Dialog Box
         if (remoteCodeVersion > 0) {
             val versionCode = BuildConfig.VERSION_CODE
             if (remoteCodeVersion > versionCode) {
@@ -80,6 +121,7 @@ class MainActivity : FirebaseConfig() {
             }
             //  main_layout!!.setBackgroundColor(Color.parseColor(remoteValueText))
         }
+        //endregion
 
     }
     //endregion
@@ -106,4 +148,71 @@ class MainActivity : FirebaseConfig() {
         finish()
     }
     //endregion
+
+    private fun loginUser(email: String, password: String) {
+
+        loading.visibility = View.VISIBLE
+         mAuth.signInWithEmailAndPassword(email, password)
+             .addOnCompleteListener(this) {
+
+                     task ->
+
+                 if (task.isSuccessful) {
+
+                     // login()
+                     //region LoginMethod
+                     val currentUser = FirebaseAuth.getInstance().currentUser
+//                     currentUser?.let { user ->
+//                         val rootRef = FirebaseDatabase.getInstance().reference
+//                         val userNameRef = rootRef.child("users").orderByChild("email").equalTo(user.email)
+//                         val eventListener = object : ValueEventListener {
+//                             override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                                 for (e in dataSnapshot.children) {
+//                                     val employee = e.getValue(Data::class.java)
+//                                     if (employee != null) {
+//                                         val u_type = employee.user_type
+//                                         loading.visibility = View.GONE
+//                                         if (u_type == "S") startActivity(
+//                                             Intent(
+//                                                 this@MainActivity,
+//                                                 UserHomeV2::class.java
+//                                             )
+//                                         )
+//                                         else if (u_type == "M") startActivity(
+//                                             Intent(
+//                                                 this@MainActivity,
+//                                                 Mentorhomev2::class.java
+//                                             )
+//                                         )
+//
+//                                     }
+//                                 }
+//                             }
+//
+//                             override fun onCancelled(databaseError: DatabaseError) {
+//                             }
+//                         }
+//                         userNameRef.addListenerForSingleValueEvent(eventListener)
+//
+//                     }
+                     //endregion
+
+
+                 } else if (task.isCanceled) {
+                     loading.visibility = View.GONE
+                     task.exception?.message?.let {
+
+                         Toast.makeText(this, "Login Failed", Toast.LENGTH_SHORT).show()
+                     }
+                 } else {
+                     loading.visibility = View.GONE
+                     task.exception?.message?.let {
+                        // toast(it)
+                         //Toast.makeText( this, "Login Failed", Toast.LENGTH_SHORT ).show();
+                     }
+                 }
+             }
+    }
+
+
 }
