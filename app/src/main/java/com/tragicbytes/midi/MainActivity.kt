@@ -19,6 +19,8 @@ class MainActivity : FirebaseConfig() {
         mFirebaseRemoteConfig = getRemoteConfigValues()
         setRemoteConfigValues()
     }
+
+
     //region Firebase Config Method 2
     private fun setRemoteConfigValues() {
         //region Fetching Values
