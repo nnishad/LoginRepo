@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : FirebaseConfig() {
+class LoginActivity : FirebaseConfig() {
     private lateinit var mFirebaseRemoteConfig: FirebaseRemoteConfig
     private var VersionCode = "versionCode"
     private lateinit var mAuth: FirebaseAuth
@@ -40,7 +40,7 @@ class MainActivity : FirebaseConfig() {
                 }
 
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                    username.error = "Valid Email Required"
+                    username.error = "Invalid Email Address"
                     username.requestFocus()
                     return@setOnClickListener
                 }
@@ -59,6 +59,8 @@ class MainActivity : FirebaseConfig() {
             }
 
         }
+
+        register.setOnClickListener { startActivity(Intent(this,Signup::class.java)) }
     }
 
     //region Firebase Config Method 2
@@ -85,7 +87,7 @@ class MainActivity : FirebaseConfig() {
                     .setCancelable(false)
                     // positive button text and action
                     .setPositiveButton(Alert_Ok_btn, DialogInterface.OnClickListener { _, _ ->
-                        val uri = Uri.parse("market://details?id=" + this@MainActivity.packageName)
+                        val uri = Uri.parse("market://details?id=" + this@LoginActivity.packageName)
                         val goToMarket = Intent(Intent.ACTION_VIEW, uri)
                         // To count with Play market backstack, After pressing back button,
                         // to taken back to our application, we need to add following flags to intent.
@@ -100,7 +102,7 @@ class MainActivity : FirebaseConfig() {
                             startActivity(
                                 Intent(
                                     Intent.ACTION_VIEW,
-                                    Uri.parse("http://play.google.com/store/apps/details?id=" + this@MainActivity.packageName)
+                                    Uri.parse("http://play.google.com/store/apps/details?id=" + this@LoginActivity.packageName)
                                 )
                             )
                         }
@@ -174,13 +176,13 @@ class MainActivity : FirebaseConfig() {
 //                                         loading.visibility = View.GONE
 //                                         if (u_type == "S") startActivity(
 //                                             Intent(
-//                                                 this@MainActivity,
+//                                                 this@LoginActivity,
 //                                                 UserHomeV2::class.java
 //                                             )
 //                                         )
 //                                         else if (u_type == "M") startActivity(
 //                                             Intent(
-//                                                 this@MainActivity,
+//                                                 this@LoginActivity,
 //                                                 Mentorhomev2::class.java
 //                                             )
 //                                         )
