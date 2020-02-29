@@ -60,7 +60,7 @@ class LoginActivity : FirebaseConfig() {
 
         }
 
-        register.setOnClickListener { startActivity(Intent(this,Signup::class.java)) }
+        register.setOnClickListener { startActivity(Intent(this,MobileNumber::class.java)) }
     }
 
     //region Firebase Config Method 2
