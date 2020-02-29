@@ -76,12 +76,12 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="15dp"
             android:text="Phone number"
-            app:layout_constraintStart_toStartOf="@+id/password"
+            app:layout_constraintStart_toStartOf="@+id/userPhone"
             app:layout_constraintTop_toBottomOf="@+id/username"
             android:layout_marginLeft="8dp" />
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/userPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="25dp"
@@ -94,9 +94,10 @@
             android:padding="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
-
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintVertical_bias="0.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -23,9 +23,6 @@ class LoginActivity : FirebaseConfig() {
 
         mFirebaseRemoteConfig = getRemoteConfigValues()
         setRemoteConfigValues()
-
-
-
         loginbtn.setOnClickListener {
             //region LoginButtonFunctionality
             try {
@@ -170,7 +167,7 @@ class LoginActivity : FirebaseConfig() {
 //                         val eventListener = object : ValueEventListener {
 //                             override fun onDataChange(dataSnapshot: DataSnapshot) {
 //                                 for (e in dataSnapshot.children) {
-//                                     val employee = e.getValue(Data::class.java)
+//                                     val employee = e.getValue(Data_info::class.java)
 //                                     if (employee != null) {
 //                                         val u_type = employee.user_type
 //                                         loading.visibility = View.GONE

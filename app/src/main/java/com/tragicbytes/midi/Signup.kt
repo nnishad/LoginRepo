@@ -1,7 +1,6 @@
 package com.tragicbytes.midi
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
@@ -25,7 +24,7 @@ class Signup : FirebaseConfig() {
             val email = u_r_email.text.toString().trim()
             val password = u_r_pass.text.toString().trim()
             val namef = name.text.toString().trim()
-            val number =mobile.text.toString().trim()
+            val number = mobile.text.toString().trim()
             val studentidf = studentid.text.toString().trim()
             val status = ("NB")
             val user_type = ("S")
@@ -66,7 +65,16 @@ class Signup : FirebaseConfig() {
                 u_r_pass.requestFocus()
                 return@setOnClickListener
             }
-            registerUser(email, password, namef, number, studentidf, status, user_type,mentorreferal)
+            registerUser(
+                email,
+                password,
+                namef,
+                number,
+                studentidf,
+                status,
+                user_type,
+                mentorreferal
+            )
 
         }
 
@@ -91,11 +99,11 @@ class Signup : FirebaseConfig() {
             .addOnCompleteListener(this) { task ->
                 progressbar.visibility = View.GONE
                 if (task.isSuccessful) {
-                    addUser(email, password, name, number, dob, status, user_type,mentorreferal)
-                  //  login()
+                    addUser(email, password, name, number, dob, status, user_type, mentorreferal)
+                    //  login()
                 } else {
                     task.exception?.message?.let {
-                  //  toast(it)
+                        //  toast(it)
                     }
                 }
             }
@@ -105,7 +113,7 @@ class Signup : FirebaseConfig() {
     override fun onStart() {
         super.onStart()
         mAuth.currentUser?.let {
-          //  login()
+            //  login()
         }
     }
 
@@ -122,13 +130,12 @@ class Signup : FirebaseConfig() {
 
 
         ref = FirebaseDatabase.getInstance().reference
-        val userId= (ref.push().key).toString()
-       // val addUser = Data(userId, email, password, name, number, studentId, status, user_type,mentorreferal)
+        val userId = (ref.push().key).toString()
+        // val addUser = Data_info(userId, email, password, name, number, studentId, status, user_type,mentorreferal)
 
 
-       // ref.child("users").child(userId).setValue(addUser)
-        Toast.makeText(this,"Registration Successful", Toast.LENGTH_LONG).show()
-
+        // ref.child("users").child(userId).setValue(addUser)
+        Toast.makeText(this, "Registration Successful", Toast.LENGTH_LONG).show()
 
 
     }
