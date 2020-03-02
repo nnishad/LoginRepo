@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "260185012851-l6tu5i2b11jnonan83lkrmo79t1m07fs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tragicbytes.midi",
+            "certificate_hash": "13d839a53d34eb5c3b6b81af86d0e3fd39d48513"
+          }
+        },
+        {
           "client_id": "260185012851-9q4sv2c17tch2rldvo1dub7uc6nq01ve.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
