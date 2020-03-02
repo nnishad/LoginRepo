@@ -148,6 +148,21 @@ class LoginActivity : FirebaseConfig() {
     }
     //endregion
 
+    //region OnResume
+    override fun onResume() {
+
+        mFirebaseRemoteConfig = getRemoteConfigValues()
+        //region Startup Notification Firebase Config
+        val remoteCodeVersion = mFirebaseRemoteConfig.getLong(VersionCode)
+        val versionCode = BuildConfig.VERSION_CODE
+
+        if (remoteCodeVersion > versionCode) {
+            getRemoteConfigValues()
+        }
+        super.onResume()
+    }
+    //endregion
+
     private fun loginUser(email: String, password: String) {
 
         loading.visibility = View.VISIBLE
